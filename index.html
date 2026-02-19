@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>olá Duarte. tempo até conheceres o Emanuel</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f0f9ff; /* Light blue background */
+            font-family: 'Comic Sans MS', 'Comic Sans', cursive; /* Fun font */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-image: url('https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/325/sparkling-heart_1f496.png'),
+                            url('https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/325/smiley-face_1f603.png'),
+                            url('https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/325/baby-chick_1f424.png'),
+                            url('https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/325/palm-tree_1f334.png');
+            background-repeat: no-repeat;
+            background-position: 10% 10%, 80% 20%, 20% 80%, 90% 90%;
+            background-size: 80px, 70px, 90px, 100px;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 1.5rem; /* Rounded corners */
+            padding: 2.5rem;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .countdown-value {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #ef4444; /* Red for countdown */
+            margin-bottom: 0.5rem;
+        }
+        .countdown-label {
+            font-size: 1.25rem;
+            color: #4b5563; /* Gray for labels */
+            margin-bottom: 1.5rem;
+        }
+        input[type="datetime-local"] {
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid #d1d5db;
+            font-size: 1rem;
+            color: #374151;
+            width: 100%;
+            max-width: 300px;
+            margin-top: 1rem;
+            background-color: #f9fafb;
+        }
+        button {
+            background-color: #3b82f6; /* Blue button */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            margin-top: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        button:hover {
+            background-color: #2563eb;
+        }
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .countdown-value {
+                font-size: 2rem;
+            }
+            .countdown-label {
+                font-size: 1rem;
+            }
+            .container {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-4xl font-extrabold text-gray-800 mb-6">olá Duarte. tempo até conheceres o Emanuel ❤️</h1>
+        
+        <div class="countdown-section">
+            <div id="days" class="countdown-value">00</div>
+            <div class="countdown-label">dias ☀️</div>
+        </div>
+        <div class="countdown-section">
+            <div id="hours" class="countdown-value">00</div>
+            <div class="countdown-label">horas ⏰</div>
+        </div>
+        <div class="countdown-section">
+            <div id="minutes" class="countdown-value">00</div>
+            <div class="countdown-label">minutos ✨</div>
+        </div>
+        <div class="countdown-section">
+            <div id="seconds" class="countdown-value">00</div>
+            <div class="countdown-label">segundos 🚀</div>
+        </div>
+
+        <input type="datetime-local" id="targetDateTimeInput">
+        <button onclick="updateTargetDate()">Atualizar Data</button>
+    </div>
+
+    <script>
+        let targetDate = new Date('2026-02-22T16:00:00'); // Initial target: Sunday, Feb 22, 2026, 4 PM (Lisbon time, assuming client's local)
+        const targetDateTimeInput = document.getElementById('targetDateTimeInput');
+
+        // Set initial input value
+        targetDateTimeInput.value = formatDateTimeLocal(targetDate);
+
+        function formatDateTimeLocal(date) {
+            const year = date.getFullYear();
+            const month = (date.getMonth() + 1).toString().padStart(2, '0');
+            const day = date.getDate().toString().padStart(2, '0');
+            const hours = date.getHours().toString().padStart(2, '0');
+            const minutes = date.getMinutes().toString().padStart(2, '0');
+            return `${year}-${month}-${day}T${hours}:${minutes}`;
+        }
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate.getTime() - now;
+
+            if (distance < 0) {
+                document.getElementById('days').innerText = "00";
+                document.getElementById('hours').innerText = "00";
+                document.getElementById('minutes').innerText = "00";
+                document.getElementById('seconds').innerText = "00";
+                document.querySelector('h1').innerText = "O Emanuel chegou! 🎉";
+                clearInterval(countdownInterval);
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText = String(days).padStart(2, '0');
+            document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+            document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+        }
+
+        function updateTargetDate() {
+            targetDate = new Date(targetDateTimeInput.value);
+            // Store in local storage for persistence across browser sessions for this client
+            localStorage.setItem('countdownTargetDate', targetDate.toISOString());
+            updateCountdown();
+        }
+
+        // Load target date from local storage if available
+        const storedDate = localStorage.getItem('countdownTargetDate');
+        if (storedDate) {
+            targetDate = new Date(storedDate);
+            targetDateTimeInput.value = formatDateTimeLocal(targetDate);
+        }
+
+        // Initial call and set interval
+        updateCountdown();
+        const countdownInterval = setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
