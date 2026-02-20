@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>olá Duarte. tempo até conheceres o Emanuel</title>
+    <title>olá Duarte! 👶 tempo até conheceres o Emanuel</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -14,167 +14,328 @@
             box-sizing: border-box;
         }
         body {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Nunito', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-attachment: fixed;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Floating decorations */
+        .floating {
+            position: fixed;
+            pointer-events: none;
+            z-index: 0;
+            animation: float 6s ease-in-out infinite;
+        }
+        .floating:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; font-size: 4rem; }
+        .floating:nth-child(2) { top: 20%; right: 10%; animation-delay: 1s; font-size: 3rem; }
+        .floating:nth-child(3) { bottom: 30%; left: 8%; animation-delay: 2s; font-size: 3.5rem; }
+        .floating:nth-child(4) { bottom: 15%; right: 5%; animation-delay: 0.5s; font-size: 4rem; }
+        .floating:nth-child(5) { top: 50%; left: 3%; animation-delay: 1.5s; font-size: 2.5rem; }
+        .floating:nth-child(6) { top: 40%; right: 3%; animation-delay: 2.5s; font-size: 3rem; }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        .main-container {
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 1rem;
+            padding: 2rem 1rem;
+            position: relative;
+            z-index: 1;
         }
-        .container {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 1.5rem;
-            padding: 3rem 2rem;
-            max-width: 600px;
+        
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 2rem;
+            padding: 2.5rem;
+            max-width: 700px;
             width: 100%;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
             text-align: center;
+            position: relative;
+            overflow: hidden;
         }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #667eea);
+            background-size: 300% 100%;
+            animation: gradient-move 3s ease infinite;
+        }
+        
+        @keyframes gradient-move {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .baby-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #f093fb;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 30px rgba(240, 147, 251, 0.3);
+        }
+        
         h1 {
-            color: #fff;
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 2.5rem;
-            line-height: 1.4;
+            color: #333;
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
         }
-        .countdown-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
+        
+        .subtitle {
+            color: #764ba2;
+            font-size: 1.1rem;
+            font-weight: 600;
             margin-bottom: 2rem;
         }
+        
+        .countdown-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+        
         .countdown-item {
-            background: rgba(255, 255, 255, 0.08);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border-radius: 1rem;
-            padding: 1.25rem;
-            transition: transform 0.2s, background 0.2s;
+            padding: 1.25rem 0.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
+        
         .countdown-item:hover {
-            background: rgba(255, 255, 255, 0.12);
-            transform: translateY(-2px);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
         }
+        
         .countdown-value {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: #4fd1c5;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #fff;
             font-variant-numeric: tabular-nums;
             margin-bottom: 0.25rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
+        
         .countdown-label {
-            font-size: 0.75rem;
-            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.65rem;
+            color: rgba(255, 255, 255, 0.9);
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            font-weight: 500;
+            font-weight: 700;
         }
+        
+        .fun-facts {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-radius: 1rem;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .fun-facts-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #764ba2;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .fun-fact {
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 0.5rem;
+        }
+        
+        .fun-fact:last-child {
+            margin-bottom: 0;
+        }
+        
+        .fun-fact strong {
+            color: #764ba2;
+        }
+        
         .settings {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 2px dashed #eee;
             padding-top: 1.5rem;
-            margin-top: 1rem;
+            margin-top: 0.5rem;
         }
+        
         .settings-label {
-            color: rgba(255, 255, 255, 0.5);
+            color: #999;
             font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
             margin-bottom: 0.75rem;
             display: block;
+            font-weight: 700;
         }
+        
         .input-group {
             display: flex;
             gap: 0.5rem;
             justify-content: center;
             flex-wrap: wrap;
         }
+        
         input[type="datetime-local"] {
             padding: 0.75rem 1rem;
-            border-radius: 0.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 0.75rem;
+            border: 2px solid #eee;
             font-size: 0.875rem;
-            color: #fff;
-            background: rgba(255, 255, 255, 0.1);
+            color: #333;
+            background: #fff;
             font-family: inherit;
-            outline: none;
-            transition: border-color 0.2s, background 0.2s;
-        }
-        input[type="datetime-local"]:focus {
-            border-color: #4fd1c5;
-            background: rgba(255, 255, 255, 0.15);
-        }
-        input[type="datetime-local"]::-webkit-calendar-picker-indicator {
-            filter: invert(1);
-            cursor: pointer;
-        }
-        button {
-            background: #4fd1c5;
-            color: #1a1a2e;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
             font-weight: 600;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        
+        input[type="datetime-local"]:focus {
+            border-color: #764ba2;
+            box-shadow: 0 0 0 3px rgba(118, 75, 162, 0.2);
+        }
+        
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            font-weight: 700;
             font-size: 0.875rem;
             border: none;
             cursor: pointer;
-            transition: background 0.2s, transform 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s;
             font-family: inherit;
         }
+        
         button:hover {
-            background: #38b2ac;
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
         }
-        button:active {
-            transform: translateY(0);
+        
+        .gallery {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
         }
-        .arrived {
-            color: #4fd1c5;
-            font-size: 2rem;
-            font-weight: 700;
+        
+        .gallery img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 1rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
         }
-        @media (max-width: 480px) {
-            .container {
-                padding: 2rem 1.5rem;
+        
+        .gallery img:hover {
+            transform: scale(1.1) rotate(3deg);
+        }
+        
+        .arrived h1 {
+            font-size: 2.5rem;
+            color: #764ba2;
+        }
+        
+        @media (max-width: 600px) {
+            .card {
+                padding: 1.5rem;
+                border-radius: 1.5rem;
             }
             h1 {
-                font-size: 1.25rem;
+                font-size: 1.4rem;
+            }
+            .countdown-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
             .countdown-value {
                 font-size: 1.25rem;
             }
-            .countdown-grid {
-                grid-template-columns: 1fr;
+            .baby-image {
+                width: 120px;
+                height: 120px;
+            }
+            .gallery img {
+                width: 80px;
+                height: 80px;
+            }
+            .floating {
+                display: none;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>olá Duarte 👋<br>tempo até conheceres o Emanuel</h1>
-        
-        <div class="countdown-grid">
-            <div class="countdown-item">
-                <div id="days" class="countdown-value">0</div>
-                <div class="countdown-label">dias</div>
+    <!-- Floating emoji decorations -->
+    <div class="floating">🎈</div>
+    <div class="floating">⭐</div>
+    <div class="floating">🎉</div>
+    <div class="floating">🍼</div>
+    <div class="floating">🧸</div>
+    <div class="floating">👶</div>
+    
+    <div class="main-container">
+        <div class="card">
+            <img src="images/baby-feet.jpg" alt="Baby" class="baby-image">
+            
+            <h1>olá Duarte! 👋</h1>
+            <p class="subtitle">⏰ Contagem até conheceres o Emanuel ⏰</p>
+            
+            <div class="countdown-grid">
+                <div class="countdown-item">
+                    <div id="days" class="countdown-value">0</div>
+                    <div class="countdown-label">dias</div>
+                </div>
+                <div class="countdown-item">
+                    <div id="hours" class="countdown-value">0</div>
+                    <div class="countdown-label">horas total</div>
+                </div>
+                <div class="countdown-item">
+                    <div id="minutes" class="countdown-value">0</div>
+                    <div class="countdown-label">minutos total</div>
+                </div>
+                <div class="countdown-item">
+                    <div id="seconds" class="countdown-value">0</div>
+                    <div class="countdown-label">segundos total</div>
+                </div>
             </div>
-            <div class="countdown-item">
-                <div id="hours" class="countdown-value">0</div>
-                <div class="countdown-label">horas (total)</div>
+            
+            <div class="gallery">
+                <img src="images/balloons.jpg" alt="Balloons">
+                <img src="images/confetti.jpg" alt="Celebration">
             </div>
-            <div class="countdown-item">
-                <div id="minutes" class="countdown-value">0</div>
-                <div class="countdown-label">minutos (total)</div>
+            
+            <div class="fun-facts">
+                <div class="fun-facts-title">🎯 Factos divertidos</div>
+                <div class="fun-fact">👶 Faltam <strong id="fact-sleeps">0</strong> sonos até o grande dia!</div>
+                <div class="fun-fact">🍕 Podes comer <strong id="fact-meals">0</strong> refeições até lá!</div>
             </div>
-            <div class="countdown-item">
-                <div id="seconds" class="countdown-value">0</div>
-                <div class="countdown-label">segundos (total)</div>
-            </div>
-        </div>
-
-        <div class="settings">
-            <label class="settings-label">Alterar data de chegada</label>
-            <div class="input-group">
-                <input type="datetime-local" id="targetDateTimeInput">
-                <button id="updateBtn">Atualizar</button>
+            
+            <div class="settings">
+                <label class="settings-label">📅 Alterar data de chegada</label>
+                <div class="input-group">
+                    <input type="datetime-local" id="targetDateTimeInput">
+                    <button id="updateBtn">Atualizar</button>
+                </div>
             </div>
         </div>
     </div>
@@ -187,9 +348,11 @@
         const hoursEl = document.getElementById('hours');
         const minutesEl = document.getElementById('minutes');
         const secondsEl = document.getElementById('seconds');
+        const factSleepsEl = document.getElementById('fact-sleeps');
+        const factMealsEl = document.getElementById('fact-meals');
         const inputEl = document.getElementById('targetDateTimeInput');
         const updateBtn = document.getElementById('updateBtn');
-        const title = document.querySelector('h1');
+        const card = document.querySelector('.card');
 
         // Load saved date from localStorage
         const savedDate = localStorage.getItem('duarteCountdownTarget');
@@ -221,7 +384,11 @@
                 hoursEl.textContent = '0';
                 minutesEl.textContent = '0';
                 secondsEl.textContent = '0';
-                title.innerHTML = '🎉 O Emanuel chegou!';
+                factSleepsEl.textContent = '0';
+                factMealsEl.textContent = '0';
+                card.classList.add('arrived');
+                card.querySelector('h1').innerHTML = '🎉 O Emanuel chegou! 🎉';
+                card.querySelector('.subtitle').innerHTML = 'Bem-vindo ao mundo, pequenino!';
                 return;
             }
 
@@ -235,6 +402,10 @@
             hoursEl.textContent = formatNumber(totalHours);
             minutesEl.textContent = formatNumber(totalMinutes);
             secondsEl.textContent = formatNumber(totalSeconds);
+            
+            // Fun facts
+            factSleepsEl.textContent = formatNumber(totalDays); // One sleep per day
+            factMealsEl.textContent = formatNumber(totalDays * 3); // 3 meals per day
         }
 
         // Handle date update
