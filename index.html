@@ -1,184 +1,255 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>olá Duarte. tempo até conheceres o Emanuel</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
-            background-color: #f0f9ff; /* Light blue background */
-            font-family: 'Comic Sans MS', 'Comic Sans', cursive; /* Fun font */
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            position: relative;
-            overflow: hidden;
-        }
-        /* Floating emoji decorations using pseudo-elements */
-        body::before {
-            content: "💖 😊 🐣 🌴 ⭐ 🎈 🌈 💕";
-            position: fixed;
-            font-size: 3rem;
-            opacity: 0.3;
-            top: 5%;
-            left: 5%;
-            letter-spacing: 2rem;
-            pointer-events: none;
-            z-index: -1;
-        }
-        body::after {
-            content: "🎀 🌟 💝 🐥 🌸 ✨ 🎁 💗";
-            position: fixed;
-            font-size: 3rem;
-            opacity: 0.3;
-            bottom: 5%;
-            right: 5%;
-            letter-spacing: 2rem;
-            pointer-events: none;
-            z-index: -1;
+            padding: 1rem;
         }
         .container {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 1.5rem; /* Rounded corners */
-            padding: 2.5rem;
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1.5rem;
+            padding: 3rem 2rem;
+            max-width: 600px;
+            width: 100%;
             text-align: center;
         }
+        h1 {
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 2.5rem;
+            line-height: 1.4;
+        }
+        .countdown-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .countdown-item {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 1rem;
+            padding: 1.25rem;
+            transition: transform 0.2s, background 0.2s;
+        }
+        .countdown-item:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-2px);
+        }
         .countdown-value {
-            font-size: 3rem;
-            font-weight: bold;
-            color: #ef4444; /* Red for countdown */
-            margin-bottom: 0.5rem;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #4fd1c5;
+            font-variant-numeric: tabular-nums;
+            margin-bottom: 0.25rem;
         }
         .countdown-label {
-            font-size: 1.25rem;
-            color: #4b5563; /* Gray for labels */
-            margin-bottom: 1.5rem;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 500;
+        }
+        .settings {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1.5rem;
+            margin-top: 1rem;
+        }
+        .settings-label {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+        .input-group {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
         }
         input[type="datetime-local"] {
             padding: 0.75rem 1rem;
             border-radius: 0.5rem;
-            border: 1px solid #d1d5db;
-            font-size: 1rem;
-            color: #374151;
-            width: 100%;
-            max-width: 300px;
-            margin-top: 1rem;
-            background-color: #f9fafb;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.875rem;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.1);
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        input[type="datetime-local"]:focus {
+            border-color: #4fd1c5;
+            background: rgba(255, 255, 255, 0.15);
+        }
+        input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            cursor: pointer;
         }
         button {
-            background-color: #3b82f6; /* Blue button */
-            color: white;
+            background: #4fd1c5;
+            color: #1a1a2e;
             padding: 0.75rem 1.5rem;
             border-radius: 0.5rem;
-            font-weight: bold;
-            margin-top: 1rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+            border: none;
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: background 0.2s, transform 0.2s;
+            font-family: inherit;
         }
         button:hover {
-            background-color: #2563eb;
+            background: #38b2ac;
+            transform: translateY(-1px);
         }
-        /* Responsive adjustments */
-        @media (max-width: 600px) {
-            .countdown-value {
-                font-size: 2rem;
-            }
-            .countdown-label {
-                font-size: 1rem;
-            }
+        button:active {
+            transform: translateY(0);
+        }
+        .arrived {
+            color: #4fd1c5;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        @media (max-width: 480px) {
             .container {
-                padding: 1.5rem;
+                padding: 2rem 1.5rem;
+            }
+            h1 {
+                font-size: 1.25rem;
+            }
+            .countdown-value {
+                font-size: 1.25rem;
+            }
+            .countdown-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 class="text-4xl font-extrabold text-gray-800 mb-6">olá Duarte. tempo até conheceres o Emanuel ❤️</h1>
+        <h1>olá Duarte 👋<br>tempo até conheceres o Emanuel</h1>
         
-        <div class="countdown-section">
-            <div id="days" class="countdown-value">00</div>
-            <div class="countdown-label">dias ☀️</div>
-        </div>
-        <div class="countdown-section">
-            <div id="hours" class="countdown-value">00</div>
-            <div class="countdown-label">horas ⏰</div>
-        </div>
-        <div class="countdown-section">
-            <div id="minutes" class="countdown-value">00</div>
-            <div class="countdown-label">minutos ✨</div>
-        </div>
-        <div class="countdown-section">
-            <div id="seconds" class="countdown-value">00</div>
-            <div class="countdown-label">segundos 🚀</div>
+        <div class="countdown-grid">
+            <div class="countdown-item">
+                <div id="days" class="countdown-value">0</div>
+                <div class="countdown-label">dias</div>
+            </div>
+            <div class="countdown-item">
+                <div id="hours" class="countdown-value">0</div>
+                <div class="countdown-label">horas (total)</div>
+            </div>
+            <div class="countdown-item">
+                <div id="minutes" class="countdown-value">0</div>
+                <div class="countdown-label">minutos (total)</div>
+            </div>
+            <div class="countdown-item">
+                <div id="seconds" class="countdown-value">0</div>
+                <div class="countdown-label">segundos (total)</div>
+            </div>
         </div>
 
-        <input type="datetime-local" id="targetDateTimeInput">
-        <button onclick="updateTargetDate()">Atualizar Data</button>
+        <div class="settings">
+            <label class="settings-label">Alterar data de chegada</label>
+            <div class="input-group">
+                <input type="datetime-local" id="targetDateTimeInput">
+                <button id="updateBtn">Atualizar</button>
+            </div>
+        </div>
     </div>
 
     <script>
-        let targetDate = new Date('2026-02-22T16:00:00'); // Initial target: Sunday, Feb 22, 2026, 4 PM (Lisbon time, assuming client's local)
-        const targetDateTimeInput = document.getElementById('targetDateTimeInput');
+        // Default target: Sunday, Feb 22, 2026, 4 PM
+        let targetDate = new Date('2026-02-22T16:00:00');
+        
+        const daysEl = document.getElementById('days');
+        const hoursEl = document.getElementById('hours');
+        const minutesEl = document.getElementById('minutes');
+        const secondsEl = document.getElementById('seconds');
+        const inputEl = document.getElementById('targetDateTimeInput');
+        const updateBtn = document.getElementById('updateBtn');
+        const title = document.querySelector('h1');
+
+        // Load saved date from localStorage
+        const savedDate = localStorage.getItem('duarteCountdownTarget');
+        if (savedDate) {
+            targetDate = new Date(savedDate);
+        }
+
+        // Format date for datetime-local input
+        function toLocalDateTimeString(date) {
+            const offset = date.getTimezoneOffset();
+            const local = new Date(date.getTime() - offset * 60000);
+            return local.toISOString().slice(0, 16);
+        }
 
         // Set initial input value
-        targetDateTimeInput.value = formatDateTimeLocal(targetDate);
+        inputEl.value = toLocalDateTimeString(targetDate);
 
-        function formatDateTimeLocal(date) {
-            const year = date.getFullYear();
-            const month = (date.getMonth() + 1).toString().padStart(2, '0');
-            const day = date.getDate().toString().padStart(2, '0');
-            const hours = date.getHours().toString().padStart(2, '0');
-            const minutes = date.getMinutes().toString().padStart(2, '0');
-            return `${year}-${month}-${day}T${hours}:${minutes}`;
+        // Format large numbers with spaces for readability
+        function formatNumber(num) {
+            return num.toLocaleString('pt-PT');
         }
 
         function updateCountdown() {
-            const now = new Date().getTime();
+            const now = Date.now();
             const distance = targetDate.getTime() - now;
 
-            if (distance < 0) {
-                document.getElementById('days').innerText = "00";
-                document.getElementById('hours').innerText = "00";
-                document.getElementById('minutes').innerText = "00";
-                document.getElementById('seconds').innerText = "00";
-                document.querySelector('h1').innerText = "O Emanuel chegou! 🎉";
-                clearInterval(countdownInterval);
+            if (distance <= 0) {
+                daysEl.textContent = '0';
+                hoursEl.textContent = '0';
+                minutesEl.textContent = '0';
+                secondsEl.textContent = '0';
+                title.innerHTML = '🎉 O Emanuel chegou!';
                 return;
             }
 
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            // Calculate totals
+            const totalSeconds = Math.floor(distance / 1000);
+            const totalMinutes = Math.floor(distance / (1000 * 60));
+            const totalHours = Math.floor(distance / (1000 * 60 * 60));
+            const totalDays = Math.floor(distance / (1000 * 60 * 60 * 24));
 
-            document.getElementById('days').innerText = String(days).padStart(2, '0');
-            document.getElementById('hours').innerText = String(hours).padStart(2, '0');
-            document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
-            document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+            daysEl.textContent = formatNumber(totalDays);
+            hoursEl.textContent = formatNumber(totalHours);
+            minutesEl.textContent = formatNumber(totalMinutes);
+            secondsEl.textContent = formatNumber(totalSeconds);
         }
 
-        function updateTargetDate() {
-            targetDate = new Date(targetDateTimeInput.value);
-            // Store in local storage for persistence across browser sessions for this client
-            localStorage.setItem('countdownTargetDate', targetDate.toISOString());
-            updateCountdown();
-        }
+        // Handle date update
+        updateBtn.addEventListener('click', function() {
+            const newDate = new Date(inputEl.value);
+            if (!isNaN(newDate.getTime())) {
+                targetDate = newDate;
+                localStorage.setItem('duarteCountdownTarget', targetDate.toISOString());
+                updateCountdown();
+            }
+        });
 
-        // Load target date from local storage if available
-        const storedDate = localStorage.getItem('countdownTargetDate');
-        if (storedDate) {
-            targetDate = new Date(storedDate);
-            targetDateTimeInput.value = formatDateTimeLocal(targetDate);
-        }
-
-        // Initial call and set interval
+        // Initial update and start interval
         updateCountdown();
-        const countdownInterval = setInterval(updateCountdown, 1000);
+        setInterval(updateCountdown, 1000);
     </script>
 </body>
 </html>
